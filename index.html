@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Study-report-convnet by kertansul</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Study-report-convnet</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/kertansul/study-report-convnet" class="btn">View on GitHub</a>
+      <a href="https://github.com/kertansul/study-report-convnet/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/kertansul/study-report-convnet/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="study-report-convnet" class="anchor" href="#study-report-convnet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>study-report-convnet</h1>
+
+<h2>
+<a id="components-in-convnet" class="anchor" href="#components-in-convnet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Components in ConvNet</h2>
+
+<h3>
+<a id="why-convolution-layer" class="anchor" href="#why-convolution-layer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Convolution Layer</h3>
+
+<ul>
+<li>Motivations: Sparse connectivity, Parameter Sharing, Equivariance to translation</li>
+<li>Stided convolution = Convolution + downsampling</li>
+<li>Special type: Locally connected convolutions (unshared convolution)</li>
+</ul>
+
+<h3>
+<a id="non-linear-layer" class="anchor" href="#non-linear-layer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>non-linear Layer</h3>
+
+<ul>
+<li>Of course the most important, provides kernel trick</li>
+<li>With conv+non-linear =&gt; exponential growth on linear regions</li>
+</ul>
+
+<h3>
+<a id="why-pooling-layer" class="anchor" href="#why-pooling-layer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Pooling Layer</h3>
+
+<ul>
+<li>Max pooling: 
+
+<ul>
+<li>Care more about whether some feature is present than exactly where it is</li>
+<li>Invariant to small translations</li>
+<li>Enlarges the maximum value's receptive field</li>
+</ul>
+</li>
+<li>Average pooling:
+
+<ul>
+<li>To reduce variance between hypothesys</li>
+</ul>
+</li>
+<li>Pooling over spatial vs. Pooling over features (may learn transformations)</li>
+<li>Pooling is also useful for handling inputs of varying size</li>
+</ul>
+
+<h3>
+<a id="why-normalization-layer" class="anchor" href="#why-normalization-layer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Normalization Layer</h3>
+
+<ul>
+<li>Re-arrange features in order to have better activations on non-linear layer</li>
+</ul>
+
+<h2>
+<a id="alexnet" class="anchor" href="#alexnet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AlexNet</h2>
+
+<h3>
+<a id="innovations" class="anchor" href="#innovations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>8-layer convnet
+
+<ul>
+<li>Use ReLU nonlinearity</li>
+<li>Training on 2 GPUs</li>
+<li>Local Response Normalization (contrast normalization) =&gt; not used recently</li>
+</ul>
+</li>
+<li>Regularization
+
+<ul>
+<li>Data augmentation</li>
+<li>Dropout</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="zfnet" class="anchor" href="#zfnet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ZFNet</h2>
+
+<h3>
+<a id="innovations-1" class="anchor" href="#innovations-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>Tried to visualize what AlexNet is actually learning =&gt; DeConv</li>
+<li>Observing First layer problems
+
+<ul>
+<li>Few features dominates =&gt; renormalize weights with RMS exceeding 0.1</li>
+<li>Aliasing and lack of mid-level features of AlexNet =&gt; Use a smaller filter size (11-&gt;7) and smaller stride (4-&gt;2)</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="experiments" class="anchor" href="#experiments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Experiments</h3>
+
+<ul>
+<li>Feature invariance (to translation, scaling, rotation)</li>
+<li>Occlusion Sensitivity (see if the machine is learning the object or its surroundings)</li>
+<li>Correspondence Analysis (check whether network can learn a hierarchy structure)</li>
+<li>Varying ImageNet model size and placing SVM on top =&gt; we must have a minimum depth</li>
+</ul>
+
+<h2>
+<a id="overfeat" class="anchor" href="#overfeat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overfeat</h2>
+
+<h3>
+<a id="innovations-2" class="anchor" href="#innovations-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>More about object detection (sliding window)</li>
+<li>Shows the meaning of 1x1 conv </li>
+</ul>
+
+<h2>
+<a id="vgg" class="anchor" href="#vgg" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>VGG</h2>
+
+<h3>
+<a id="innovations-3" class="anchor" href="#innovations-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>Investigate the effect of the convolutional network depth on its accuracy</li>
+<li>Increase depth (16-19) with only 3x3 + 1x1 conv</li>
+</ul>
+
+<h3>
+<a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusions</h3>
+
+<ul>
+<li>Stacking 3x3 convs is better than single 7x7
+
+<ul>
+<li>faster computation</li>
+<li>more non-linearity</li>
+</ul>
+</li>
+<li>Adding 1x1 conv in between may be useful =&gt; adding a non-linear layer (NIN has a better explanasion)</li>
+<li>LRN is useless</li>
+<li>Initialization is important (use Xavier init)</li>
+<li>Add scaling to data augmentation</li>
+</ul>
+
+<h2>
+<a id="network-in-network" class="anchor" href="#network-in-network" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Network in Network</h2>
+
+<h3>
+<a id="concept" class="anchor" href="#concept" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Concept</h3>
+
+<ul>
+<li>having too many filters for a single concept imposes extra burden on the next layer, which needs to consider all combinations of variations from the previous layer</li>
+</ul>
+
+<h3>
+<a id="innovations-4" class="anchor" href="#innovations-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>Represents MLP (multi-layer perceptron) Layers = larger conv + 1x1 conv</li>
+<li>Global average pooling before fully connected rather than pure concatenate</li>
+<li>MLP can implement dropouts on top</li>
+</ul>
+
+<h2>
+<a id="googlenet" class="anchor" href="#googlenet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GoogLeNet</h2>
+
+<h3>
+<a id="concept-1" class="anchor" href="#concept-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Concept</h3>
+
+<ul>
+<li>Improved utilization of the computing resources inside the network</li>
+<li>Extend a network's width + depth instead of just depth</li>
+<li>Based on Hebbian principle (sparsity + clustering): neurons that fires together, wires together
+
+<ul>
+<li>Want to create a somewhat non-uniform sparse model for each layer</li>
+<li>Use concatenate of ConvNets =&gt; small dense matrices</li>
+<li>Wires together =&gt; Clustering =&gt; use 1x1 Conv</li>
+<li>Think convnets in another aspect: as clustering methods rather than feature extraction</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="innovations-5" class="anchor" href="#innovations-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>Inception module (1x1, 3x3, 5x5, 3x3 max)</li>
+<li>Use 1x1 conv as a parameter reduction method (before 3x3, 5x5 conv; after 3x3 max as a clustering method)</li>
+</ul>
+
+<h3>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Architecture</h3>
+
+<ul>
+<li>Use avg pooling at last</li>
+<li>Tried to modify features produced in the middle of the network</li>
+</ul>
+
+<h2>
+<a id="resnet" class="anchor" href="#resnet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ResNet</h2>
+
+<h3>
+<a id="innovations-6" class="anchor" href="#innovations-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Innovations</h3>
+
+<ul>
+<li>Observed the problem of training error saturation (problems brought out by ReLU)</li>
+<li>Use a Residual network 
+
+<ul>
+<li>Gradients flow back from top</li>
+<li>While network want an identity matrix, just set the non-linear functions to 0</li>
+</ul>
+</li>
+<li>Start using batch normalization</li>
+</ul>
+
+<h3>
+<a id="architecture-1" class="anchor" href="#architecture-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Architecture</h3>
+
+<ul>
+<li>Bottleneck architecture for speed up =&gt; reading squeezenet</li>
+</ul>
+
+<h2>
+<a id="future" class="anchor" href="#future" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Future</h2>
+
+<ul>
+<li>Try different non-linear function methods</li>
+<li>Think about bottleneck architecture</li>
+<li>Track about GoogLeNet's spare representation</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/kertansul/study-report-convnet">Study-report-convnet</a> is maintained by <a href="https://github.com/kertansul">kertansul</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
