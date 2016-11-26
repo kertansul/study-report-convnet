@@ -1,13 +1,36 @@
-# study-report-convnet
+# From AlexNet to SqueezeNet
+By 陳柏翔 (Shawn Chen)
+
+## Introduction
+This is a study report about convolution network architectures.
+After studying cs231n, one should have a fairly good idea about how convnet operates and 
+might also remember those famous ConvNets' names mentioned in class (e.g. AlexNet, VGG, GoogLeNet, ResNet).
+However, to me, it's not clear why those networks are constructed in such a way, 
+and I was eagerly wanting to know how people explore and create new convnet architectures.
+Therefore, after reading through the original papers,
+I tried to come up with my own way of thinkings that how convnets are developed and evolved throughout history.
+
+## Prerequisites
+It's highly recommended that one should have basic concepts upon the followings before reading this review report:
+ - how neural network works (forward pass, linear classifier, non-linear activation function)
+ - how neural networks are trained (backward pass, SGD, batch)
+ - specific operations (convolution, max pooling, avg. pooling, batch-norm)
 
 ## Components in ConvNet
+Before going into the whole network architecture, let's examine the major components in a convnet.
+This section is highly inspired by the book "Deep Learning" written by Goodfellow.
 
-### Why Convolution Layer
- - Motivations: Sparse connectivity, Parameter Sharing, Equivariance to translation
- - Stided convolution = Convolution + downsampling
+### Convolution Layer
+#### Motivation
+ - Sparse connectivity
+ - Parameter Sharing
+ - Equivariance to translation
+ 
+#### Important Concepts
+ - Strided convolution = Convolution + downsampling
  - Special type: Locally connected convolutions (unshared convolution)
 
-### non-linear Layer
+### Non-linear Layer
  - Of course the most important, provides kernel trick
  - With conv+non-linear => exponential growth on linear regions
 
@@ -29,7 +52,7 @@
 ### Innovations
  - 8-layer convnet
     - Use ReLU nonlinearity
-    - Training on 2 GPUs
+    - Trained on 2 GPUs
     - Local Response Normalization (contrast normalization) => not used recently
  - Regularization
     - Data augmentation
@@ -103,7 +126,7 @@
  - Start using batch normalization
 
 ### Architecture
- - Bottleneck architecture for speed up => reading squeezenet
+ - Bottleneck architecture for speed up => read squeezenet
 
 ## Future
  - Try different non-linear function methods
